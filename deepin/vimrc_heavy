@@ -1,0 +1,219 @@
+"========================================================================================================================
+"  Native Configs
+"========================================================================================================================
+
+" reset Leader
+let mapleader="."
+" copy to system clipboard
+vnoremap <Leader>y "+y 
+" paste from system clipboard
+nmap <Leader>p "+p
+
+set nocompatible
+syntax enable
+syntax on
+set number
+set wildmenu "vim command auto-completion
+
+set confirm "prompt when handle unsaved or read-only file
+set history=50
+set nobackup
+
+set hlsearch "highlight word by word when search
+set incsearch "incremental search
+set ignorecase "ignore case when search"
+
+"set showmatch "highlight corresponding bracket
+"set matchtime=10 "blink corresponding bracket for a certain time
+
+set encoding=utf-8
+set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,euc-jp,latin1
+
+filetype plugin indent on
+
+set background=dark
+colorscheme solarized
+
+set gcr=a:block-blinkon0 "disable cursor blinking
+set guicursor=i:ver1 "set cursor shape
+set guifont=Monaco:h14 "set font
+" scrolls
+set guioptions-=l
+set guioptions-=L
+set guioptions-=r
+set guioptions-=R
+" tool bars and menus
+set guioptions-=m
+set guioptions-=T
+
+set ruler " enable ruler
+set laststatus=2  " always show status bar
+set cursorline  " highlight current row
+"set cursorcolumn  " highlight current coloum
+
+set smartindent
+set autoindent
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab "automatically replace tab with space
+
+"set foldmethod=manual
+set foldmethod=indent
+"set foldmethod=syntax
+
+set nofoldenable "no fold when initially logging in vim
+
+inoremap <F9> <C-O>za
+nnoremap <F9> za
+onoremap <F9> <C-C>za
+vnoremap <F9> zf
+
+"========================================================================================================================
+"  Plugin Configs
+"========================================================================================================================
+
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim' "let Vundle manage Vundle, required
+Plugin 'Valloric/YouCompleteMe' "auto-complete
+Plugin 'vim-syntastic/syntastic' "syntax checker
+Plugin 'scrooloose/nerdTree' "vim files browser
+Plugin 'scrooloose/nerdcommenter' "vim c/c++ comment
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'Yggdroot/indentLine'
+Plugin 'Raimondi/delimitMate' "auto-complete for quotes, parens, etc
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+
+filetype plugin on    " required
+
+"" Valloric/YouCompleteMe
+
+let g:ycm_complete_in_comments=1
+" 允许 vim 加载 .ycm_extra_conf.py 文件，不再提示
+let g:ycm_confirm_extra_conf=0
+" 开启 YCM 标签补全引擎
+let g:ycm_collect_identifiers_from_tags_files=1
+" 引入 C++ 标准库tags
+set tags+=/data/misc/software/misc./vim/stdcpp.tags
+" YCM 集成 OmniCppComplete 补全引擎，设置其快捷键
+inoremap <Leader>; <C-x><C-o>
+" 补全内容不以分割子窗口形式出现，只显示补全列表
+set completeopt-=preview
+" 从第一个键入字符就开始罗列匹配项
+let g:ycm_min_num_of_chars_for_completion=1
+" 禁止缓存匹配项，每次都重新生成匹配项
+let g:ycm_cache_omnifunc=0
+" 语法关键字补全
+let g:ycm_seed_identifiers_with_syntax=1
+" path to .ycm_extra_conf.py
+let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
+
+nnoremap <Leader>GL :YcmCompleter GoToDeclaration<CR>
+nnoremap <Leader>GF :YcmCompleter GoToDefinition<CR>
+nnoremap <Leader>GR :YcmCompleter GoToReferences<CR>
+
+nmap <F4> :YcmDiags<CR>
+
+"" vim-syntastic/syntastic
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_mode_map = { 'passive_filetypes': ['html', 'java'] }
+let g:syntastic_quiet_messages = {"type": "style", "level": "warnings"}
+
+"" scrooloose/nerdTree
+
+map <Leader><F3> :NERDTreeToggle<CR>
+" enable when startup
+" autocmd VimEnter * NERDTree
+" let NERDTreeShowBookmarks=1
+
+" let NERDTreeShowHidden=1
+" let NERDTreeAutoDeleteBuffer=1
+let NERDTreeWinPos="left"
+let NERDTreeIgnore=['\.pyc$', '\.class$', '\.o$', '\.git$', '\.idea$']
+
+"" scrooloose/nerdcommenter
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+" Add your own custom formats or override the defaults
+" let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+" Enable NERDCommenterToggle to check all selected lines is commented or not
+let g:NERDToggleCheckAllLines = 1
+
+"" terryma/vim-multiple-cursors
+
+let g:multi_cursor_use_default_mapping=0
+" Default mapping
+let g:multi_cursor_start_word_key      = '<C-n>'
+let g:multi_cursor_select_all_word_key = '<A-n>'
+let g:multi_cursor_start_key           = 'g<C-n>'
+let g:multi_cursor_select_all_key      = 'g<A-n>'
+let g:multi_cursor_next_key            = '<C-n>'
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
+
+"" iamcco/markdown-preview.vim'
+
+let g:mkdp_path_to_chrome = ""
+" path to the chrome or the command to open chrome(or other modern browsers)
+" if set, g:mkdp_browserfunc would be ignored
+
+let g:mkdp_browserfunc = 'MKDP_browserfunc_default'
+" callback vim function to open browser, the only param is the url to open
+
+let g:mkdp_auto_start = 0
+" set to 1, the vim will open the preview window once enter the markdown
+" buffer
+
+let g:mkdp_auto_open = 0
+" set to 1, the vim will auto open preview window when you edit the
+" markdown file
+
+let g:mkdp_auto_close = 1
+" set to 1, the vim will auto close current preview window when change
+" from markdown buffer to another buffer
+
+let g:mkdp_refresh_slow = 0
+" set to 1, the vim will just refresh markdown when save the buffer or
+" leave from insert mode, default 0 is auto refresh markdown as you edit or
+" move the cursor
+
+let g:mkdp_command_for_global = 0
+" set to 1, the MarkdownPreview command can be use for all files,
+" by default it just can be use in markdown file
+
+let g:mkdp_open_to_the_world = 0
+" set to 1, preview server available to others in your network
+" by default, the server only listens on localhost (127.0.0.1)
+
+nmap <silent> <F8> <Plug>MarkdownPreview        " for normal mode
+nmap <silent> <F9> <Plug>StopMarkdownPreview    " for normal mode

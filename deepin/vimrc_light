@@ -1,0 +1,99 @@
+"===============================================================================
+"  General
+"===============================================================================
+
+set nocompatible 
+syntax enable
+syntax on
+set number
+
+set confirm "prompt when handle unsaved or read-only file
+set history=50
+set nobackup
+
+"highlight word by word when search
+set hlsearch
+set incsearch
+" set ignorecase "ignore case when search"
+
+"set showmatch "highlight corresponding bracket
+"set matchtime=10 "blink corresponding bracket for a certain time
+
+"encoding configuration
+set encoding=utf-8
+set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,euc-jp,latin1
+
+filetype on	
+filetype plugin on 
+filetype indent on
+
+"===============================================================================
+"  Theme
+"===============================================================================
+
+" theme
+"colorscheme desert
+colorscheme solarized
+"colorscheme molokai
+"colorscheme phd
+
+" background mode
+set background=dark
+
+"==========
+" Display
+"==========
+
+set gcr=a:block-blinkon0  " cursor does not blink
+set guicursor=i:ver1  " set cursor: 1% vertical bar when insert
+set guifont=Monaco:h14
+" no scrolls
+set guioptions-=l
+set guioptions-=L
+set guioptions-=r
+set guioptions-=R
+" no tool bars and menus
+set guioptions-=m
+set guioptions-=T
+
+set ruler " enable ruler
+set laststatus=2  " always show status bar
+"highlight current row and column
+set cursorline  " highlight current row
+" set cursorcolumn  " highlight current coloum
+
+" not line wrap
+" set nowrap
+
+"===============================================================================
+"  Indent
+"===============================================================================
+
+set smartindent
+set autoindent
+set tabstop=4  " tab length
+set softtabstop=4 
+set shiftwidth=4
+set expandtab "automatically replace tab with space
+
+"===============================================================================
+"  Fold
+"===============================================================================
+
+"set foldmethod=manual
+set foldmethod=indent
+"set foldmethod=syntax
+
+"no fold when initially logging in vim
+set nofoldenable 
+
+inoremap <F9> <C-O>za
+nnoremap <F9> za
+onoremap <F9> <C-C>za
+vnoremap <F9> zf
+
+"===============================================================================
+"  Auto-complete
+"===============================================================================
+
+set wildmenu "vim command line auto-complete"

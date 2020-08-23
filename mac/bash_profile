@@ -1,0 +1,28 @@
+alias ll="ls -lah"
+alias vi="vim"
+alias clc="clear"
+alias du="du -h -d 1"
+
+alias mvn-src-doc="mvn dependency:sources dependency:resolve -Dclassifier=javadoc"
+
+alias g++11="g++ -std=c++11"
+alias git='LANG=en_US git'
+
+export CLICOLOR=1 # Set CLICOLOR if you want Ansi Colors in iTerm2 
+export TERM=xterm-256color # Set colors to match iTerm2 Terminal Colors
+export HOMEBREW_NO_GITHUB_API=1 #fix the bug of recently updated homebrew
+
+# safe rm
+function rm() {
+    # move to .Trash
+    prefix=$(date +%Y-%m-%d)
+    if [ ! -d $HOME/.Trash/$prefix ]; then
+        mkdir -p $HOME/.Trash/$prefix
+    fi
+    if [[ -z $1 ]] ;then
+        echo '--usage rm file'
+        return
+    fi
+    mv $1 $HOME/.Trash/$prefix
+    echo "mv" $1 "to" $HOME/.Trash/$prefix
+}
