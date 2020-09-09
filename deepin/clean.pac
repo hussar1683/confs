@@ -1,12 +1,14 @@
 var proxy = "SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT;";
 
 var rules = [
-    "https://www.quora.com/",
+    "vimawesome.com/",
+    "learnvimscriptthehardway.stevelosh.com",
+    "www.quora.com/",
     ".quora.com/",
     "||quora.com/",
     "redis.io",
     "*.jetbrains.com",
-    "https://www.w3schools.com/",
+    "www.w3schools.com/",
     "www.geeksforgeeks.org",
     "medium.com",
     "||altrec.com",
