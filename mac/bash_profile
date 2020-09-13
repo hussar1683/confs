@@ -1,4 +1,5 @@
-alias ll="ls -lah"
+alias ll="ls -lh"
+alias la="ls -lah"
 alias mvn-src-doc="mvn dependency:sources dependency:resolve -Dclassifier=javadoc"
 
 export CLICOLOR=1 # Set CLICOLOR if you want Ansi Colors in iTerm2
